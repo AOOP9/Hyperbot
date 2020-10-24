@@ -3,7 +3,7 @@ const lichessBotName = process.env.BOT_NAME || "RobotPatzer"
 // const lichessBotName = process.env.BOT_NAME || "HyperBotPatzer"
 const engineThreads = process.env.ENGINE_THREADS || "1"
 const engineHash = process.env.ENGINE_Hash || "64"
-const engineMoveOverhead = process.env.ENGINE_MOVE_OVERHEAD || "1000"
+const engineMoveOverhead = process.env.ENGINE_MOVE_OVERHEAD || "2000"
 const engineContempt = process.env.ENGINE_CONTEMPT || "24" // 100
 const generalTimeout = parseInt(process.env.GENERAL_TIMEOUT || "5")
 const queryPlayingInterval = parseInt(process.env.QUERY_PLAYING_INTERVAL || "60")
@@ -202,14 +202,9 @@ app.get('/', (req, res) => {
 
             <p><a href="https://lichess.org/@/RobotPatzer" rel="noopener noreferrer" target="_blank">RobotPatzer on Lichess.org</a>
             ( <a href="/chr" rel="noopener noreferrer" target="_blank">${lichessBotName} vs Random Lichess Bot</a> )
-
-            <p><a href="https://lichess.org/@/BlazikenBot2000" rel="noopener noreferrer" target="_blank">BlazikenBot2000 on Lichess.org</a>
-
-            <p><a href="https://lichess.org/@/HyperBotPatzer" rel="noopener noreferrer" target="_blank">HyperBotPatzer on Lichess.org</a>
-            ( <a href="/chr" rel="noopener noreferrer" target="_blank">${lichessBotName} vs Random Lichess Bot</a> )
-            </p>
             <p id="logBestmove" style="font-family: monospace;"></p>
-            
+
+            <p><a href="https://lichess.org/@/BlazikenBot2000" rel="noopener noreferrer" target="_blank">BlazikenBot2000 on Lichess.org</a>            
             <script>            
             function processSource(blob){
                 if(blob.kind == "tick"){                    
@@ -236,9 +231,10 @@ function playGame(gameId){
     .setoption("Hash", engineHash)
     .setoption("Move Overhead", engineMoveOverhead)
     .setoption("Contempt", engineContempt) 
-
-    setTimeout(_=>lichessUtils.gameChat(gameId, "all", 'https://robot-patzer.herokuapp.com/'), 2000)
-    setTimeout(_=>lichessUtils.gameChat(gameId, "all", `Good luck!`), 4000)
+    
+    setTimeout(_=>lichessUtils.gameChat(gameId, "all", `I am RobotPatzer!`), 2000)
+    setTimeout(_=>lichessUtils.gameChat(gameId, "all", 'https://patzer-chess-bot.herokuapp.com/'), 4000)
+    setTimeout(_=>lichessUtils.gameChat(gameId, "all", `Good Luck!`), 6000)
 
     playingGameId = gameId
 
@@ -324,7 +320,7 @@ function streamEvents(){
 
                 engine.stop()
 
-                setTimeout(_=>lichessUtils.gameChat(gameId, "all", `Good game!`), 2000)
+                setTimeout(_=>lichessUtils.gameChat(gameId, "all", `Good Game!`), 2000)
             }
         }         
     }})
